@@ -29,11 +29,11 @@
     );
   }
 
-  /* ----- Active nav link ----- */
-  const here = location.pathname.split("/").pop() || "index.html";
+  /* ----- Active nav link (works with and without .html / clean URLs) ----- */
+  const norm = (p) => (p.split("/").pop() || "index").replace(/\.html$/, "");
+  const here = norm(location.pathname);
   document.querySelectorAll(".main-nav a").forEach((a) => {
-    const target = a.getAttribute("href").split("/").pop();
-    if (target === here) a.classList.add("active");
+    if (norm(a.getAttribute("href")) === here) a.classList.add("active");
   });
 
   /* ----- Duplicate marquee tracks for seamless loop ----- */
